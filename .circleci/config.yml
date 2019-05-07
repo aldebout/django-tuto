@@ -17,7 +17,7 @@ jobs:
             mkdir test-results
       - run:
           command: |
-            pipenv run python manage.py test
+            pipenv run pytest --junitxml=test-reports/junit.xml
       - store_test_results:
           path: test-results
       - store_artifacts:
