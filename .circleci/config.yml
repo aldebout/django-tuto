@@ -14,10 +14,10 @@ jobs:
             pipenv install
       - run:
           command: |
-            pipenv run python manage.py test
+            mkdir test-results
       - run:
           command: |
-            mkdir test-results
+            pipenv run python manage.py test
       - store_test_results:
           path: test-results
       - store_artifacts:
