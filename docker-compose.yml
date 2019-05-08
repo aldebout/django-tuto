@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:10
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: .
+    command: python /code/manage.py runserver 0.0.0.0:80
+    volumes:
+      - .:/code
+    ports:
+      - "8000:80"
+      - "9000:9000"
+    links:
+      - db
+    environment:
+      DATABASE_URL: 'postgres://postgres@db:5432/postgres'
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.16.233.0/24
